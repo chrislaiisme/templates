@@ -14,13 +14,14 @@ function setEvent(btn, code) {
 
 var content = "";
 
-function setContent(link) {
+function setContent(link, num) {
   var xhr = new XMLHttpRequest();
   xhr.open("GET", link);
   xhr.onload = () => {
     if (xhr.readyState === xhr.DONE) {
       if (xhr.status === 200) {
         var res = xhr.responseText;
+        if(num != 0) res += "\n"
         content += res;
       }
     }
@@ -33,17 +34,17 @@ async function init() {
   codes = document.querySelectorAll(".code");
   strs = ["Default_Code", "LeetCode", "Generate", "Generate_Simple", "Match", "Special_Judge"];
   headings = [[0, 1], [1], [0, 1, 2], [0, 1, 2], [0, 1, 2], [0, 1, 2]];
-  link = "https://raw.githubusercontent.com/chrislaiisme/chrislaiisme.github.io/main/My_Templates/";
+  link = "https://raw.githubusercontent.com/chrislaiisme/templates/main/";
   for(var i=0; i<codes.length; i++) {
     content = "";
     setEvent(btns[i], codes[i]);
     for(var j=0; j<headings[i].length; j++) {
-      setContent(link + "Heading" + headings[i][j].toString() + ".txt");
+      setContent(link + "Heading" + headings[i][j].toString() + ".txt", headings[i][j]);
       await sleep(10);
     }
-    content += "\n\n";
+    content += "\n";
     await sleep(10);
-    setContent(link + strs[i] + ".txt");
+    setContent(link + strs[i] + ".txt", -1);
     await sleep(10);
     codes[i].innerHTML = content;
   }
