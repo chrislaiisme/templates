@@ -48,6 +48,7 @@ async function init() {
     await sleep(10);
     codes[i].innerHTML = content;
   }
+  sleep(1000);
 }
 
 
@@ -76,3 +77,4 @@ function func() {
 	return "AAA";
 }
 init();
+location.reload();
