@@ -77,4 +77,4 @@ function func() {
 	return "AAA";
 }
 init();
-location.reload();
+// location.reload();
